@@ -15,16 +15,16 @@ angular.module('services', [])
 
     function getProjects() {
         var request = $http({
-            method: "GET",
-            url: "assets/data/Distribution_of_Donor_and_GOK_Funded_Projects_2013_to_2015.geojson",
+            method: 'GET',
+            url: 'assets/data/Distribution_of_Donor_and_GOK_Funded_Projects_2013_to_2015.geojson',
         });
         return(request.then( handleSuccess, handleError));
     }
 
     function getCounties() {
         var request = $http({
-            method: "GET",
-            url: "assets/data/counties.geojson",
+            method: 'GET',
+            url: 'assets/data/counties.geojson',
         });
         return(request.then( handleSuccess, handleError));
     }
@@ -38,8 +38,8 @@ angular.module('services', [])
               acc[x.properties.county].cost_projects += x.properties.total_project_cost__kes_;
             } else {
               acc[x.properties.county] = {
-                "number_projects": 1,
-                "cost_projects": x.properties.total_project_cost__kes_,
+                'number_projects': 1,
+                'cost_projects': x.properties.total_project_cost__kes_,
               };
             }
             return acc;
@@ -62,7 +62,7 @@ angular.module('services', [])
             ! angular.isObject( response.data ) ||
             ! response.data.message
             ) {
-            return( $q.reject("An unknown error occurred."));
+            return( $q.reject('An unknown error occurred.'));
         }
         // Otherwise, use expected error message.
         return( $q.reject( response.data.message ) );

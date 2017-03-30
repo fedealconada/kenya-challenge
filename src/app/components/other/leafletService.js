@@ -17,9 +17,9 @@ angular.module('services')
 
     function _costStyle(feature) {
       var data = DataService.getProcessedData();
-      var average_cost =  data[feature.properties.COUNTY_NAM].cost_projects / data[feature.properties.COUNTY_NAM].number_projects;
+      var averageCost =  data[feature.properties.COUNTY_NAM].cost_projects / data[feature.properties.COUNTY_NAM].number_projects;
       return {
-        fillColor: costColour(average_cost/1000000),
+        fillColor: costColour(averageCost/1000000),
         weight: 1,
         opacity: 0.7,
         color: 'grey',
@@ -133,19 +133,19 @@ angular.module('services')
     }
 
     function createMessage(marker) {
-        var project_title = '<h2> Unknown project </h2>';
-        var project_description = '<h3>Description</h3><div>The project description is not available.</div>';
-        var project_objectives = '<h3>Objectives</h3><div>The project objectives are not available.</div>';
-        if (marker.properties.project_title !== null) {
-          project_title = '<h2>' + marker.properties.project_title + '</h2>';
+        var projectTitle = '<h2> Unknown project </h2>';
+        var projectDescription = '<h3>Description</h3><div>The project description is not available.</div>';
+        var projectObjectives = '<h3>Objectives</h3><div>The project objectives are not available.</div>';
+        if (marker.properties.projectTitle !== null) {
+          projectTitle = '<h2>' + marker.properties.projectTitle + '</h2>';
         }
-        if (marker.properties.project_description !== null) {
-          project_description = '<h3>Description</h3><div>' + marker.properties.project_description + '</div>';
+        if (marker.properties.projectDescription !== null) {
+          projectDescription = '<h3>Description</h3><div>' + marker.properties.projectDescription + '</div>';
         }
-        if (marker.properties.project_objectives !== null) {
-          project_objectives = '<h3>Objectives</h3><div>' + marker.properties.project_objectives + '</div>';
+        if (marker.properties.projectObjectives !== null) {
+          projectObjectives = '<h3>Objectives</h3><div>' + marker.properties.projectObjectives + '</div>';
         }
-        return project_title + project_description + project_objectives;
+        return projectTitle + projectDescription + projectObjectives;
     }
 
   }]);

@@ -11,6 +11,12 @@ gulp.task('clean', function() {
       .pipe(clean(true));
 });
 
+gulp.task('lint', function() {
+  return gulp.src('./src/app/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
 gulp.task('browserify', function() {
     return browserify('./src/app/app.js')
         .bundle()
@@ -21,7 +27,7 @@ gulp.task('browserify', function() {
 gulp.task('copy', ['browserify','scss'], function() {
     gulp.src(['./src/**/*.html','./src/**/*.css', './src/**/*.geojson'])
         .pipe(gulp.dest('./public'))
-		.pipe(browserSync.stream())
+    .pipe(browserSync.stream())
 });
 
 gulp.task('scss', function() {
@@ -30,22 +36,22 @@ gulp.task('scss', function() {
         .pipe(gulp.dest('./src/assets/stylesheets/'));
 });
 
-gulp.task('build',['clean', 'scss', 'copy']);
+gulp.task('build',['clean', 'lint', 'scss', 'copy']);
 
 gulp.task('browser-sync', ['build'], function() {
     browserSync.init({
         server: {
             baseDir: "./public",
-			routes: {
-				"/node_modules": "node_modules"
-			}
+      routes: {
+        "/node_modules": "node_modules"
+      }
         },
-		browser:"google chrome"
+    browser:"google chrome"
     });
 });
 
 
 gulp.task('run', ['browser-sync'], function(){
-	gulp.watch("./src/**/*.*", ["build"]);
-	gulp.watch("./public/**/*.*").on('change', browserSync.reload);
+  gulp.watch("./src/**/*.*", ["build"]);
+  gulp.watch("./public/**/*.*").on('change', browserSync.reload);
 })
