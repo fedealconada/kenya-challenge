@@ -1,0 +1,35 @@
+{
+  "name": "ushahidi",
+  "version": "1.0.0",
+  "description": "Ushahidi coding challenge",
+  "main": "\u001b ",
+  "scripts": {
+    "test": " "
+  },
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "author": "Federico M. Alconada Verzini",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.9.11",
+    "browserify": "^12.0.0",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-clean": "^0.3.2",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.4.7",
+    "angular-animate": "^1.4.7",
+    "angular-aria": "^1.4.7",
+    "angular-leaflet-directive": "^0.10.0",
+    "angular-ui-router": "^0.3.2",
+    "leaflet": "^1.0.3",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet-groupedlayercontrol": "^0.6.0",
+    "leaflet.markercluster": "^1.0.4"
+  }
+}
