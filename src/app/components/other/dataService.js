@@ -8,18 +8,10 @@ angular.module('services', [])
     return({
         getProjects: getProjects,
         getCounties: getCounties,
+        getValidMarkers: getValidMarkers,
         processData: processData,
-        getProcessedData: getProcessedData,
-        getValidMarkers: getValidMarkers
-
+        getProcessedData: getProcessedData
     });
-
-    // return an array with the markers that have the property 'geometry'
-    function getValidMarkers(projects) {
-      return projects.features.filter(function(marker){
-        return marker.geometry;
-      });
-    }
 
     function getProjects() {
         var request = $http({
@@ -56,6 +48,13 @@ angular.module('services', [])
 
     function getProcessedData() {
         return processedData;
+    }
+
+    // return an array with the markers that have the property 'geometry'
+    function getValidMarkers(projects) {
+      return projects.features.filter(function(marker){
+        return marker.geometry;
+      });
     }
 
     function handleError(response) {
