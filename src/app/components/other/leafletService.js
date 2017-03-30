@@ -7,25 +7,11 @@ angular.module('services')
     var legend;
 
     return({
-        getValidMarkers: getValidMarkers,
+        createLayers: createLayers,
+        addMarkersToLayers: addMarkersToLayers,
+        addItems: addItems,
+        createMessage: createMessage
     });
-
-    // return an array with the markers that have the property 'geometry'
-    function getValidMarkers(projects) {
-      var markers = [];
-      for (var i = 0; i < projects.features.length; i++) {
-        if (projects.features[i].geometry) {
-          markers.push(
-            {
-              lat:projects.features[i].geometry.coordinates[1],
-              lng:projects.features[i].geometry.coordinates[0],
-              message: createMessage(projects.features[i])
-            }
-          );
-        }
-      }
-      return markers;
-    }
 
     function createMessage(marker) {
         var project_title = '<h2> Unknown project </h2>';
@@ -41,6 +27,34 @@ angular.module('services')
           project_objectives = '<h3>Objectives</h3><div>' + marker.properties.project_objectives + '</div>';
         }
         return project_title + project_description + project_objectives;
+    }
+
+    function createLayers(counties) {
+        return {
+            disposition: {
+                regular: new L.LayerGroup(),
+                clustered: new L.markerClusterGroup()
+            }
+        };
+    }
+
+    function addMarkersToLayers(markers, layers) {
+      for (var i = 0; i < markers.length; i++) {
+        var marker_data = markers[i];
+        var message = createMessage(marker_data);
+        var marker = L.marker([marker_data.geometry.coordinates[1], marker_data.geometry.coordinates[0]]).bindPopup(message);
+        marker.addTo(layers.disposition.clustered);
+        marker.addTo(layers.disposition.regular);
+      }
+    }
+
+    function addItems(map, layers, controls) {
+      for (var i = 0; i < layers.length; i++) {
+        map.addLayer(layers[i]);
+      }
+      for (var j = 0; j < controls.length; j++) {
+        map.addControl(controls[j]);
+      }
     }
 
   }]);

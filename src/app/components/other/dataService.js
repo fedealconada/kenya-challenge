@@ -9,8 +9,17 @@ angular.module('services', [])
         getProjects: getProjects,
         getCounties: getCounties,
         processData: processData,
-        getProcessedData: getProcessedData
+        getProcessedData: getProcessedData,
+        getValidMarkers: getValidMarkers
+
     });
+
+    // return an array with the markers that have the property 'geometry'
+    function getValidMarkers(projects) {
+      return projects.features.filter(function(marker){
+        return marker.geometry;
+      });
+    }
 
     function getProjects() {
         var request = $http({

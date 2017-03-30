@@ -3,7 +3,13 @@
 
 angular.module('ushahidi.home', [])
 
-.controller('homeCtrl', ['$scope', '$http', 'leafletData', 'DataService', 'LeafletService', function($scope, $http, leafletData, DataService, LeafletService) {
+.constant("GROUP_NAMES", {
+    "COLOURS": "<b>Colours</b>",
+    "DISPOSITION": "<b>Disposition</b>",
+    "CHOROPLETHS": "<b>Choropleths</b>"
+})
+
+.controller('homeCtrl', ['$scope', '$http', 'leafletData', 'DataService', 'LeafletService', 'GROUP_NAMES', function($scope, $http, leafletData, DataService, LeafletService, GROUP_NAMES) {
 
     angular.extend($scope, {
         kenya: {
@@ -27,7 +33,28 @@ angular.module('ushahidi.home', [])
       DataService.getProjects().then(function(data){
         var projects = data;
         DataService.processData(projects);
-        $scope.markers = LeafletService.getValidMarkers(projects);
+
+        var layers = LeafletService.createLayers(counties);
+        LeafletService.addMarkersToLayers(DataService.getValidMarkers(projects), layers);
+
+        leafletData.getMap().then(function(map) {
+            var groupedOverlays = {};
+            groupedOverlays[GROUP_NAMES.DISPOSITION] = {
+              "Non-clustered markers": layers.disposition.regular,
+              "Clustered markers": layers.disposition.clustered,
+            };
+
+            // create all data and control layers
+            var options = {
+                  exclusiveGroups: ["<b>Disposition</b>"],
+                },
+                boxControl = L.control.groupedLayers(null, groupedOverlays, options);
+
+            // initialise map
+            var initialLayers = [layers.disposition.clustered],
+                controls = [boxControl];
+            LeafletService.addItems(map, initialLayers, controls);
+        });
 
       });
 
