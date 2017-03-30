@@ -140,14 +140,14 @@ angular.module('services')
             var projectTitle = '<h2> Unknown project </h2>';
             var projectDescription = '<h3>Description</h3><div>The project description is not available.</div>';
             var projectObjectives = '<h3>Objectives</h3><div>The project objectives are not available.</div>';
-            if (marker.properties.projectTitle !== null) {
-                projectTitle = '<h2>' + marker.properties.projectTitle + '</h2>';
+            if (marker.properties.project_title !== null) {
+                projectTitle = '<h2>' + marker.properties.project_title + '</h2>';
             }
-            if (marker.properties.projectDescription !== null) {
-                projectDescription = '<h3>Description</h3><div>' + marker.properties.projectDescription + '</div>';
+            if (marker.properties.project_description !== null) {
+                projectDescription = '<h3>Description</h3><div>' + marker.properties.project_description + '</div>';
             }
-            if (marker.properties.projectObjectives !== null) {
-                projectObjectives = '<h3>Objectives</h3><div>' + marker.properties.projectObjectives + '</div>';
+            if (marker.properties.project_objectives !== null) {
+                projectObjectives = '<h3>Objectives</h3><div>' + marker.properties.project_objectives + '</div>';
             }
             return projectTitle + projectDescription + projectObjectives;
         }
