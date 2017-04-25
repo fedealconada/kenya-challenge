@@ -1,4 +1,4 @@
-Ushahidi coding challenge
+Kenya information map
 ===========================
 
 This projects displays a map using [data on donor and government funded projects in Kenya](http://www.opendata.go.ke/datasets/distribution-of-donor-and-gok-funded-projects-2013-to-2015).
@@ -14,7 +14,6 @@ Each marker displays information (project title, description and objectives) rel
 
 1. Install node modules
   * `npm install`
-  * `bower install`
 
 2. Run gulp
   * `gulp run`
